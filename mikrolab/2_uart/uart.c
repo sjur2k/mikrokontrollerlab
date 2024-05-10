@@ -12,13 +12,13 @@ typedef struct {
     volatile uint32_t PSELTXD;
     volatile uint32_t PSELCTS;
     volatile uint32_t PSELRXD;
-    volatile uint32_t RESERVED2[3];
+    volatile uint32_t RXD;
+    volatile uint32_t TXD;
     volatile uint32_t BAUDRATE;
 } NRF_UART_REG;
 
 
-/*void uart_init(){
-    
+void uart_init(){
     GPIO->PIN_CNF[8] = (0<<0);
     GPIO->PIN_CNF[6] = (1<<0);
     UART->PSELTXD=1<<8;
@@ -27,10 +27,12 @@ typedef struct {
     UART->PSELCTS=0xFFFFFFFF;
     UART->PSELRTS=0xFFFFFFFF;
     UART->ENABLE=4;
-    UART->SHORTS=1<<3; //?
+    UART->SHORTS=1<<3;
     return;
-}*/
+}
+
 void uart_send(char letter){
+    UART->TXD=letter;
     return;
 }
 char uart_read(){
